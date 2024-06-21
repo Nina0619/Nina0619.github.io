@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>甜心設計工作室</title>
+    <link
+      rel="stylesheet"
+      href="desktop.css"
+      media="screen and (min-width: 768px)"
+    />
+    <link
+      rel="stylesheet"
+      href="mobile.css"
+      media="screen and (max-width: 767px)"
+    />
+    <style>
+      /* 通用样式 */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        color: #ff0080;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        background-image: url("img/未命名-13_工作區域\ 1.png");
+        background-size: cover; /* 確保圖片覆蓋整個背景 */
+        background-repeat: no-repeat; /* 防止圖片重複 */
+      }
+      header,
+      footer {
+        background-color: #ff00a6;
+        padding: 10px 0;
+      }
+      nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+      }
+      nav ul li {
+        margin: 0 15px;
+      }
+      nav ul li a {
+        color: #000;
+        text-decoration: none;
+        font-weight: bold;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+      nav ul li a:hover {
+        transform: scale(1.1);
+        color: #ff66cc;
+      }
+      .about-section {
+        padding: 50px 20px;
+      }
+      .about-section img {
+        border-radius: 50%;
+        width: 150px; /* 设置头像图片宽度 */
+        height: 150px; /* 设置头像图片高度 */
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+      .about-section img:hover {
+        transform: scale(1.1);
+      }
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        margin-top: 20px; /* 增加顶部间距 */
+      }
+      .card {
+        width: calc(33.33% - 20px); /* 每行显示三张卡片，考虑到间距，计算宽度 */
+        margin-bottom: 20px;
+        cursor: pointer;
+        perspective: 1000px;
+      }
+      .card-inner {
+        position: relative;
+        width: 100%;
+        padding-top: 150%; /* 1:1比例 */
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+      }
+      .card-inner.flipped {
+        transform: rotateY(180deg);
+      }
+      .card-front,
+      .card-back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+      }
+      .card-back {
+        transform: rotateY(180deg);
+      }
+      .card-front img,
+      .card-back img {
+        width: 100%; /* 设置卡片图片宽度 */
+        height: 100%; /* 设置卡片图片高度 */
+        object-fit: cover; /* 确保图片完全填充卡片 */
+        border-radius: 10px; /* 设置卡片的倒圆角 */
+      }
+      .hide {
+        display: none;
+      }
+      .contact-section {
+        padding: 40px 20px; /* 增加上下间距 */
+      }
+      .contact-section p {
+        margin: 10px 0; /* 调整段落的上下间距 */
+      }
+      footer p {
+        margin: 5px 0;
+        font-size: 12px;
+      }
+      .icon {
+        width: 20px; /* 将大小缩小至与文字相同 */
+        height: 20px; /* 将大小缩小至与文字相同 */
+        padding: 5px; /* 加入间距 */
+      }
+      .logo {
+        max-width: 80%; /* 设置最大宽度为100% */
+        height: auto; /* 自动计算高度，保持比例 */
+        display: block; /* 确保图片以块级元素显示，使得margin属性能够生效 */
+        margin: 0 auto; /* 居中显示 */
+      }
+      @media screen and (max-width: 767px) {
+        .card {
+          width: calc(50% - 20px); /* 在小屏幕下，每行显示两张卡片 */
+        }
+        .card-container {
+          padding: 10px; /* 调整卡片容器的内边距 */
+          gap: 10px; /* 调整卡片之间的间距 */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav-container">
+        <button class="nav-button" onclick="toggleMenu()">&#9776;</button>
+        <!-- 漢堡按鈕 -->
+        <nav class="nav-menu hide">
+          <!-- 預設隱藏的下拉選單 -->
+          <ul>
+            <li><a href="#design">Design</a></li>
+            <li><a href="#font">Font</a></li>
+            <li><a href="#photography">Photography</a></li>
+            <li><a href="#illustration">Illustration</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <section id="home">
+      <img src="img/logo.png" alt="甜心设计工作室Logo" class="logo" />
+      <!-- 替换为你的logo图片路径 -->
+    </section>
+    <section id="about" class="about-section">
+      <img src="img/013.png" alt="Avatar" onclick="zoomImage(this)" />
+      <!-- 替换为你的头像图片路径 -->
+      <h2>ABOUT ME</h2>
+      <p id="about-text">我叫 Nina Tu，是一名設計師。</p>
+    </section>
+    <section id="projects">
+      <h2>DRAW CARDS</h2>
+      <div class="card-container">
+        <!-- 一共十二張卡片，分成三排 -->
+        <div class="card" onclick="flipCard(this)">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="img/000.jpg" alt="Card Image" />
+              <!-- 替换为你的卡片图片路径 -->
+            </div>
+            <div class="card-back">
+              <img src="img/001.jpg" alt="Card Image" />
+            </div>
+          </div>
+        </div>
+        <!-- 2 -->
+        <div class="card" onclick="flipCard(this)">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="img/000.jpg" alt="Card Image" />
+              <!-- 替换为你的卡片图片路径 -->
+            </div>
+            <div class="card-back">
+              <img src="img/002.jpg" alt="Card Image" />
+            </div>
+          </div>
+        </div>
+        <!-- 3同上 -->
+        <div class="card" onclick="flipCard(this)">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="img/000.jpg" alt="Card Image" />
+              <!-- 替换为你的卡片图片路径 -->
+            </div>
+            <div class="card-back">
+              <img src="img/003.jpg" alt="Card Image" />
+            </div>
+          </div>
+        </div>
+        <!-- 4同上 -->
+        <div class="card" onclick="flipCard(this)">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="img/000.jpg" alt="Card Image" />
+              <!-- 替换为你的卡片图片路径 -->
+            </div>
+            <div class="card-back">
+              <img src="img/004.jpg" alt="Card Image" />
+            </div>
+          </div>
+        </div>
+        <!-- 5同上 -->
+        <div class="card" onclick="flipCard(this)">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="img/000.jpg" alt="Card Image" />
+              <!-- 替换为你的卡片图片路径 -->
+            </div>
+            <div class="card-back">
+              <img src="img/005.jpg" alt="Card Image" />
+            </div>
+          </div>
+        </div>
+        <!-- 6同上 -->
+        <div class="card" onclick="flipCard(this)">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="img/000.jpg" alt="Card Image" />
+              <!-- 替换为你的卡片图片路径 -->
+            </div>
+            <div class="card-back">
+              <img src="img/006.jpg" alt="Card Image" />
+            </div>
+          </div>
+        </div>
+        <!-- 7同上 -->
+        <div class="card" onclick="flipCard(this)">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="img/000.jpg" alt="Card Image" />
+              <!-- 替换为你的卡片图片路径 -->
+            </div>
+            <div class="card-back">
+              <img src="img/006.jpg" alt="Card Image" />
+            </div>
+          </div>
+        </div>
+        <!-- 8同上 -->
+        <div class="card" onclick="flipCard(this)">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="img/000.jpg" alt="Card Image" />
+              <!-- 替换为你的卡片图片路径 -->
+            </div>
+            <div class="card-back">
+              <img src="img/007.jpg" alt="Card Image" />
+            </div>
+          </div>
+        </div>
+        <!-- 9同上 -->
+        <div class="card" onclick="flipCard(this)">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="img/000.jpg" alt="Card Image" />
+              <!-- 替换为你的卡片图片路径 -->
+            </div>
+            <div class="card-back">
+              <img src="img/008.jpg" alt="Card Image" />
+            </div>
+          </div>
+        </div>
+        <!-- 10同上 -->
+        <div class="card" onclick="flipCard(this)">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="img/000.jpg" alt="Card Image" />
+              <!-- 替换为你的卡片图片路径 -->
+            </div>
+            <div class="card-back">
+              <img src="img/009.jpg" alt="Card Image" />
+            </div>
+          </div>
+        </div>
+        <!-- 其余卡片同上 -->
+      </div>
+    </section>
+    <section id="contact" class="contact-section">
+      <h2>contact me</h2>
+      <p>Email: info@sweetheart.com</p>
+      <p>Phone: +123 456 7890</p>
+      <p>Address: 123 Sweet Heart St, Design City</p>
+      <p>
+        <a href="https://zh.wikipedia.org/zh-tw/Facebook"
+          ><img
+            src="img/2023_Facebook_icon.svg.png"
+            alt="Facebook图标"
+            class="icon"
+        /></a>
+        <!-- 替换为你的Facebook图标路径 -->
+        <a href="https://zh.wikipedia.org/zh-tw/Twitter"
+          ><img src="img/X_logo_2023.svg.png" alt="Twitter图标" class="icon"
+        /></a>
+        <!-- 替换为你的Twitter图标路径 -->
+        <a href="https://www.instagram.com/lucky_star.official"
+          ><img
+            src="img/Instagram_logo_2022.svg.webp"
+            alt="Instagram图标"
+            class="icon"
+        /></a>
+        <!-- 替换为你的Instagram图标路径 -->
+      </p>
+    </section>
+    <footer>
+      <p>&copy; 2024 設計工作室。保留所有權利。</p>
+    </footer>
+    <script>
+      function toggleMenu() {
+        document.querySelector(".nav-menu").classList.toggle("show");
+      }
+      function flipCard(card) {
+        card.querySelector(".card-inner").classList.toggle("flipped");
+      }
+      function zoomImage(img) {
+        img.classList.toggle("zoomed");
+      }
+
+      // 加入這個函式在 <script> 區塊內
+      let aboutTextIndex = 0;
+      const aboutText = [
+        "我叫 Nina Tu，是一名設計師。",
+        "歡迎來體驗精彩的抽卡活動。",
+        "我的聯絡方式在頁面底部。",
+        "歡迎隨時與我聯繫，想閒聊也可以ㄛ！！！",
+      ];
+
+      function animateAboutText() {
+        document.getElementById("about-text").innerHTML =
+          aboutText[aboutTextIndex];
+        aboutTextIndex = (aboutTextIndex + 1) % aboutText.length;
+        setTimeout(animateAboutText, 2000); // 每 3 秒切換文字
+      }
+
+      // 網頁載入時呼叫 animateAboutText()
+      document.addEventListener("DOMContentLoaded", animateAboutText);
+    </script>
+  </body>
+</html>

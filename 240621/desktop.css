@@ -1,0 +1,29 @@
+/* 電腦版CSS */
+.card-container .card {
+  width: 18%; /* 確保每排可以顯示四張卡片 */
+}
+
+@media (min-width: 768px) {
+  .nav-menu {
+    display: flex !important;
+  }
+  .nav-button {
+    display: none;
+  }
+  .nav-menu ul {
+    display: flex;
+  }
+  .nav-menu ul li {
+    margin: 0 15px;
+  }
+  .nav-menu ul li a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  .nav-menu ul li a:hover {
+    transform: scale(1.1);
+    color: #ff66cc;
+  }
+}

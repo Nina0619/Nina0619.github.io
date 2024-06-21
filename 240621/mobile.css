@@ -1,0 +1,26 @@
+/* 手機版CSS */
+.nav-menu {
+  display: none;
+}
+
+.nav-menu.show {
+  display: block;
+}
+
+.nav-button {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 每排顯示兩張卡片 */
+  gap: 10px;
+}
+
+.card-container .card {
+  width: 100%;
+}
